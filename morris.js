@@ -28,6 +28,7 @@
       lineWidth: 3,
       pointSize: 4,
       lineColors: ['#0b62a4', '#7A92A3', '#4da74d', '#afd8f8', '#edc240', '#cb4b4b', '#9440ed'],
+      xkey: "key",
       ymax: 'auto',
       marginTop: 25,
       marginRight: 25,
@@ -65,7 +66,7 @@
       for (_i = 0, _len = _ref.length; _i < _len; _i++) {
         ykey = _ref[_i];
         this.series.push($.map(this.options.data, function(d) {
-          return d[ykey];
+          return d.value[ykey];
         }));
       }
       this.xvals = $.map(this.columnLabels, function(x) {
