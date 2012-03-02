@@ -15,6 +15,9 @@
         this.el = $(options.element);
       }
       this.options = $.extend({}, this.defaults, options);
+      if (options.click) {
+          this.click = options.click;
+      }
       if (this.options.data === void 0 || this.options.data.length === 0) return;
       this.el.addClass('graph-initialised');
       this.precalc();
@@ -250,6 +253,24 @@
       };
       this.el.mousemove(function(evt) {
         return updateHilight(evt.pageX);
+      });
+      this.el.click(function(evt){
+        var x = evt.pageX;
+        var hoverIndex, _ref9, _results;
+        x -= _this.el.offset().left;
+        _results = [];
+        for (
+            hoverIndex = _ref9 = hoverMargins.length; 
+            _ref9 <= 0 ? hoverIndex <= 0 : hoverIndex >= 0; 
+            _ref9 <= 0 ? hoverIndex++ : hoverIndex--
+        ) {
+          if (hoverIndex === 0 || hoverMargins[hoverIndex - 1] > x) {
+            if (_this.click) {
+              _this.click(_this.columnLabels[hoverIndex]);
+             }
+             break;
+          }
+        }
       });
       touchHandler = function(evt) {
         var touch;
